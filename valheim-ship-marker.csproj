@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.8</TargetFramework>
+    <RootNamespace>VH_Ship_Marker_Mod</RootNamespace>
+    <GamePath>E:\Steam\steamapps\common\Valheim</GamePath>
+  </PropertyGroup>
+
+   <PropertyGroup>
+    <BepInExPath>$(GamePath)\BepInEx</BepInExPath>
+    <ManagedDataPath>$(GamePath)\valheim_Data\Managed</ManagedDataPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BepinEx">
+      <HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="HarmonyLib">
+      <HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ManagedDataPath)\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ManagedDataPath)\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(ManagedDataPath)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Valheim">
+      <HintPath>$(ManagedDataPath)\assembly_valheim.dll</HintPath>
+    </Reference>
+    <Reference Include="Guiutils">
+      <HintPath>$(ManagedDataPath)\assembly_guiutils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
