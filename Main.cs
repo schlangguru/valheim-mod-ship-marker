@@ -82,7 +82,6 @@ namespace VH_Ship_Marker_Mod {
                 gameObject = UnityEngine.Object.Instantiate<GameObject>(Minimap.instance.m_pinPrefab);
                 data.Marker = gameObject;
 				gameObject.GetComponent<Image>().sprite = GetShipMarkerSprite();
-                gameObject.GetComponent<Image>().color = new Color(0.4f, 0.57f, 1f, 1f);
                 gameObject.transform.SetParent(parent);
                 (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
                 (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
