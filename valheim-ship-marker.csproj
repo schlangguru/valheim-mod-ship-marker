@@ -33,6 +33,9 @@
     <Reference Include="Guiutils">
       <HintPath>$(ManagedDataPath)\assembly_guiutils.dll</HintPath>
     </Reference>
+    <Reference Include="Utils">
+      <HintPath>$(ManagedDataPath)\assembly_utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
