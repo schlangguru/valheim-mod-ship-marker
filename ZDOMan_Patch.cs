@@ -15,13 +15,14 @@ namespace VH_Ship_Marker_Mod
       foreach (string prefab in Main.shipTypes)
       {
         ZDOMan.instance.GetAllZDOsWithPrefab(prefab, shipZDOs);
-      }
-      foreach (ZDO zdo in shipZDOs)
-      {
-        ShipMarkerData markerData = new ShipMarkerData();
-        markerData.ZDO = zdo;
-
-        Main._shipMarkers.Add(zdo.m_uid, markerData);
+        foreach (ZDO zdo in shipZDOs)
+        {
+          ShipMarkerData markerData = new ShipMarkerData();
+          markerData.ZDO = zdo;
+          markerData.Type = prefab;
+          Main._shipMarkers.Add(zdo.m_uid, markerData);
+        }
+        shipZDOs.Clear();
       }
     }
 

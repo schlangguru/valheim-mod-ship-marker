@@ -6,6 +6,9 @@ namespace VH_Ship_Marker_Mod
   public class ShipMarkerData
   {
 
+    public string Type
+    { get; set; }
+
     public GameObject Marker
     { get; set; }
 

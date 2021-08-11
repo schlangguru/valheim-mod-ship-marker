@@ -19,7 +19,7 @@ namespace VH_Ship_Marker_Mod
         foreach (ShipMarkerData data in Main._shipMarkers.Values)
         {
           Vector3 shipPos = data.ZDO.GetPosition();
-          if (IsPointVisible(shipPos, rawImage) && !HasPlayerOnBoard(data.ZDO))
+          if (IsPointVisible(shipPos, rawImage) && !IsShipControlledByPlayer(data.ZDO))
           {
             DrawShipMarker(data, markerSize, rectTransform, rawImage, ___m_largeZoom);
           }
@@ -34,7 +34,7 @@ namespace VH_Ship_Marker_Mod
       }
     }
 
-    private static bool HasPlayerOnBoard(ZDO zdo)
+    private static bool IsShipControlledByPlayer(ZDO zdo)
     {
       ZNetView zNetView = ZNetScene.instance.FindInstance(zdo);
       if (zNetView != null)
@@ -45,7 +45,7 @@ namespace VH_Ship_Marker_Mod
           Ship ship = gameObject.GetComponent<Ship>();
           if (ship != null)
           {
-            return ship.HasPlayerOnboard();
+            return ship.HaveControllingPlayer();
           }
         }
       }
@@ -81,7 +81,7 @@ namespace VH_Ship_Marker_Mod
       if (Minimap.instance.m_largeRoot.activeSelf && largeMapZoom < Minimap.instance.m_showNamesZoom)
       {
         text.gameObject.SetActive(true);
-        text.text = Localization.instance.Localize("Ship");
+        text.text = Localization.instance.Localize("$ship_" + data.Type.ToLower());
       }
       else
       {
