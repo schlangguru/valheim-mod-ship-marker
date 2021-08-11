@@ -10,8 +10,8 @@ namespace VH_Ship_Marker_Mod
     [HarmonyPostfix]
     private static void Loaded()
     {
+      Main._shipMarkers.Clear();
       List<ZDO> shipZDOs = new List<ZDO>();
-
       foreach (string prefab in Main.shipTypes)
       {
         ZDOMan.instance.GetAllZDOsWithPrefab(prefab, shipZDOs);
