@@ -25,12 +25,6 @@ namespace VH_Ship_Marker_Mod
       _harmony.PatchAll(typeof(Minimap_Patch));
     }
 
-    public static void Log(string msg)
-    {
-      StreamWriter file = new StreamWriter("E:/Temp/log.txt", append: true);
-      file.WriteLine(msg);
-      file.Close();
-    }
 
     private void OnDestroy()
     {
