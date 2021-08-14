@@ -10,29 +10,35 @@ namespace VH_Ship_Marker_Mod
     [HarmonyPostfix]
     private static void Loaded()
     {
-      Main._shipMarkers.Clear();
+      Main.ShipMarkers.Clear();
       List<ZDO> shipZDOs = new List<ZDO>();
-      foreach (string prefab in Main.shipTypes)
+      foreach (ShipType shipType in Main.ShipTypes)
       {
-        ZDOMan.instance.GetAllZDOsWithPrefab(prefab, shipZDOs);
+        ZDOMan.instance.GetAllZDOsWithPrefab(shipType.Prefab, shipZDOs);
         foreach (ZDO zdo in shipZDOs)
         {
           ShipMarkerData markerData = new ShipMarkerData();
           markerData.ZDO = zdo;
-          markerData.Type = prefab;
-          Main._shipMarkers.Add(zdo.m_uid, markerData);
+          markerData.Type = shipType;
+          Main.ShipMarkers.Add(zdo.m_uid, markerData);
         }
         shipZDOs.Clear();
       }
     }
 
     [HarmonyPatch(typeof(ZNetScene), "OnZDODestroyed")]
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     private static void ZDODestroyed(ZDO zdo)
     {
-      if (Main._shipMarkers.ContainsKey(zdo.m_uid))
+      if (Main.ShipMarkers.ContainsKey(zdo.m_uid))
       {
-        Main._shipMarkers.Remove(zdo.m_uid);
+        ShipMarkerData data = Main.ShipMarkers[zdo.m_uid];
+        data.ZDO = null;
+        data.Type = null;
+        if (data.Marker != null) {
+          UnityEngine.Object.Destroy(data.Marker);
+        }
+        Main.ShipMarkers.Remove(zdo.m_uid);
       }
     }
 
@@ -40,12 +46,16 @@ namespace VH_Ship_Marker_Mod
     [HarmonyPostfix]
     private static void ZDOAdded(ZDO zdo)
     {
-      IEnumerable<int> prefabHashes = Main.shipTypes.Select(str => str.GetStableHashCode());
-      if (prefabHashes.Contains(zdo.GetPrefab()))
+      foreach (ShipType type in Main.ShipTypes)
       {
-        ShipMarkerData markerData = new ShipMarkerData();
-        markerData.ZDO = zdo;
-        Main._shipMarkers.Add(zdo.m_uid, markerData);
+        if (zdo.GetPrefab() == type.Prefab.GetStableHashCode() && !Main.ShipMarkers.ContainsKey(zdo.m_uid))
+        {
+          ShipMarkerData markerData = new ShipMarkerData();
+          markerData.ZDO = zdo;
+          markerData.Type = type;
+          Main.ShipMarkers.Add(zdo.m_uid, markerData);
+          break;
+        }
       }
     }
   }

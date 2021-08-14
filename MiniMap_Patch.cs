@@ -11,12 +11,12 @@ namespace VH_Ship_Marker_Mod
     [HarmonyPostfix]
     private static void UpdatePins(float ___m_largeZoom)
     {
-      if (Main._shipMarkers.Count > 0)
+      if (Main.ShipMarkers.Count > 0)
       {
         RawImage rawImage = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_mapImageLarge : Minimap.instance.m_mapImageSmall;
         float markerSize = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_pinSizeLarge : Minimap.instance.m_pinSizeSmall;
         RectTransform rectTransform = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_pinRootLarge : Minimap.instance.m_pinRootSmall;
-        foreach (ShipMarkerData data in Main._shipMarkers.Values)
+        foreach (ShipMarkerData data in Main.ShipMarkers.Values)
         {
           Vector3 shipPos = data.ZDO.GetPosition();
           if (IsPointVisible(shipPos, rawImage) && !IsShipControlledByPlayer(data.ZDO))
@@ -81,7 +81,7 @@ namespace VH_Ship_Marker_Mod
       if (Minimap.instance.m_largeRoot.activeSelf && largeMapZoom < Minimap.instance.m_showNamesZoom)
       {
         text.gameObject.SetActive(true);
-        text.text = Localization.instance.Localize("$ship_" + data.Type.ToLower());
+        text.text = Localization.instance.Localize(data.Type.Name);
       }
       else
       {

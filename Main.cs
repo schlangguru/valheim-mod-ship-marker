@@ -14,8 +14,12 @@ namespace VH_Ship_Marker_Mod
 
     private Harmony _harmony = null;
 
-    public static List<string> shipTypes = new List<string>() {"Raft", "Karve", "Longship"};
-    public static Dictionary<ZDOID, ShipMarkerData> _shipMarkers = new Dictionary<ZDOID, ShipMarkerData>();
+    public static List<ShipType> ShipTypes = new List<ShipType>() {
+      new ShipType("Raft", "$ship_raft"),
+      new ShipType("Karve", "$ship_karve"),
+      new ShipType("VikingShip", "$ship_longship")
+    };
+    public static Dictionary<ZDOID, ShipMarkerData> ShipMarkers = new Dictionary<ZDOID, ShipMarkerData>();
 
 
     void Awake()
@@ -29,14 +33,14 @@ namespace VH_Ship_Marker_Mod
     private void OnDestroy()
     {
       this._harmony?.UnpatchSelf();
-      foreach (ShipMarkerData data in _shipMarkers.Values)
+      foreach (ShipMarkerData data in ShipMarkers.Values)
       {
         if (data.Marker != null)
         {
           UnityEngine.Object.Destroy(data.Marker);
         }
       }
-      _shipMarkers.Clear();
+      ShipMarkers.Clear();
     }
   }
 }
