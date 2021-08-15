@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 namespace VH_Ship_Marker_Mod
 {
 
-  [BepInPlugin("de.schlangguru.vh_ship_marker_mod", "Valheim Ship Marker Mod", "1.0.0")]
+  [BepInPlugin("de.schlangguru.vh_ship_marker_mod", "Valheim Ship Marker Mod", "1.1.0")]
   [BepInProcess("valheim.exe")]
   public class Main : BaseUnityPlugin
   {
