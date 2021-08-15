@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\mapicon_anchor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="BepinEx">
       <HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
     </Reference>
@@ -22,10 +26,13 @@
       <HintPath>$(ManagedDataPath)\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(ManagedDataPath)\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(GamePath)\unstripped_corlib\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>$(ManagedDataPath)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(GamePath)\unstripped_corlib\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="Valheim">
       <HintPath>$(ManagedDataPath)\assembly_valheim.dll</HintPath>

@@ -65,7 +65,7 @@ namespace VH_Ship_Marker_Mod
 
         gameObject = UnityEngine.Object.Instantiate<GameObject>(Minimap.instance.m_pinPrefab);
         data.Marker = gameObject;
-        gameObject.GetComponent<Image>().sprite = GetShipMarkerSprite();
+        gameObject.GetComponent<Image>().sprite = Main.ShipMarkerSprite;
         gameObject.transform.SetParent(parent);
         (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
         (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
@@ -87,11 +87,6 @@ namespace VH_Ship_Marker_Mod
       {
         text.gameObject.SetActive(false);
       }
-    }
-
-    private static Sprite GetShipMarkerSprite()
-    {
-      return Minimap.instance.m_icons.Find((Minimap.SpriteData x) => x.m_name == Minimap.PinType.Icon2).m_icon;
     }
 
     private static bool IsPointVisible(Vector3 p, RawImage map)
