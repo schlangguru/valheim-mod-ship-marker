@@ -11,15 +11,15 @@ namespace VH_Ship_Marker_Mod
     [HarmonyPostfix]
     private static void UpdatePins(float ___m_largeZoom)
     {
-      if (Main.ShipMarkers.Count > 0)
+      if (Main.Markers.Count > 0)
       {
         RawImage rawImage = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_mapImageLarge : Minimap.instance.m_mapImageSmall;
         float markerSize = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_pinSizeLarge : Minimap.instance.m_pinSizeSmall;
         RectTransform rectTransform = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_pinRootLarge : Minimap.instance.m_pinRootSmall;
-        foreach (ShipMarkerData data in Main.ShipMarkers.Values)
+        foreach (MarkerData data in Main.Markers.Values)
         {
           Vector3 shipPos = data.ZDO.GetPosition();
-          if (IsPointVisible(shipPos, rawImage) && !IsShipControlledByPlayer(data.ZDO))
+          if (IsPointVisible(shipPos, rawImage) && !IsInControlByPlayer(data.ZDO) && data.Type.Show)
           {
             DrawShipMarker(data, markerSize, rectTransform, rawImage, ___m_largeZoom);
           }
@@ -34,7 +34,7 @@ namespace VH_Ship_Marker_Mod
       }
     }
 
-    private static bool IsShipControlledByPlayer(ZDO zdo)
+    private static bool IsInControlByPlayer(ZDO zdo)
     {
       ZNetView zNetView = ZNetScene.instance.FindInstance(zdo);
       if (zNetView != null)
@@ -47,13 +47,18 @@ namespace VH_Ship_Marker_Mod
           {
             return ship.HaveControllingPlayer();
           }
+
+          Vagon vagon = gameObject.GetComponent<Vagon>();
+          if (vagon != null) {
+            return vagon.IsAttached(Player.m_localPlayer);
+          }
         }
       }
 
       return false;
     }
 
-    private static void DrawShipMarker(ShipMarkerData data, float size, RectTransform parent, RawImage rawImage, float largeMapZoom)
+    private static void DrawShipMarker(MarkerData data, float size, RectTransform parent, RawImage rawImage, float largeMapZoom)
     {
       GameObject gameObject = data.Marker;
       if (gameObject == null || gameObject.transform.parent != parent)
@@ -65,7 +70,7 @@ namespace VH_Ship_Marker_Mod
 
         gameObject = UnityEngine.Object.Instantiate<GameObject>(Minimap.instance.m_pinPrefab);
         data.Marker = gameObject;
-        gameObject.GetComponent<Image>().sprite = Main.ShipMarkerSprite;
+        gameObject.GetComponent<Image>().sprite = data.Type.Sprite;
         gameObject.transform.SetParent(parent);
         (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
         (gameObject.transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);

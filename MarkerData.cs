@@ -3,9 +3,9 @@ using UnityEngine;
 namespace VH_Ship_Marker_Mod
 {
 
-  public class ShipMarkerData
+  public class MarkerData
   {
-    public ShipType Type
+    public MarkerType Type
     { get; set; }
 
     public GameObject Marker

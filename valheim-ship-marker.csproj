@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\mapicon_anchor.png" />
+    <EmbeddedResource Include="Resources\mapicon_cart.png" />
   </ItemGroup>
 
   <ItemGroup>
