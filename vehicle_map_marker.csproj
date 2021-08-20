@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net4.8</TargetFramework>
-    <RootNamespace>VH_Ship_Marker_Mod</RootNamespace>
+    <RootNamespace>Vehicle_Map_Marker</RootNamespace>
     <GamePath>E:\Steam\steamapps\common\Valheim</GamePath>
   </PropertyGroup>
 

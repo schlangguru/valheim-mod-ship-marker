@@ -1,6 +1,6 @@
-# Valheim Ship Marker
+# Valheim Vehicle Marker
 
-Simple Valheim mod that adds markers for all ships to the map.
+Simple Valheim mod that adds markers for all ships and carts to the map.
 
 # Credits
 Icons from: https://feathericons.com

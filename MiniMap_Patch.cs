@@ -2,7 +2,7 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VH_Ship_Marker_Mod
+namespace Vehicle_Map_Marker
 {
   class Minimap_Patch
   {
@@ -18,10 +18,10 @@ namespace VH_Ship_Marker_Mod
         RectTransform rectTransform = Minimap.instance.m_largeRoot.activeSelf ? Minimap.instance.m_pinRootLarge : Minimap.instance.m_pinRootSmall;
         foreach (MarkerData data in Main.Markers.Values)
         {
-          Vector3 shipPos = data.ZDO.GetPosition();
-          if (IsPointVisible(shipPos, rawImage) && !IsInControlByPlayer(data.ZDO) && data.Type.Show)
+          Vector3 vehiclePos = data.ZDO.GetPosition();
+          if (IsPointVisible(vehiclePos, rawImage) && !IsInControlByPlayer(data.ZDO) && data.Type.Show)
           {
-            DrawShipMarker(data, markerSize, rectTransform, rawImage, ___m_largeZoom);
+            DrawVehicleMarker(data, markerSize, rectTransform, rawImage, ___m_largeZoom);
           }
           else
           {
@@ -58,7 +58,7 @@ namespace VH_Ship_Marker_Mod
       return false;
     }
 
-    private static void DrawShipMarker(MarkerData data, float size, RectTransform parent, RawImage rawImage, float largeMapZoom)
+    private static void DrawVehicleMarker(MarkerData data, float size, RectTransform parent, RawImage rawImage, float largeMapZoom)
     {
       GameObject gameObject = data.Marker;
       if (gameObject == null || gameObject.transform.parent != parent)

@@ -1,6 +1,6 @@
 using BepInEx.Configuration;
 
-namespace VH_Ship_Marker_Mod
+namespace Vehicle_Map_Marker
 {
   public class Configuration
   {

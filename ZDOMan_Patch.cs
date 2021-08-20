@@ -1,8 +1,7 @@
 using HarmonyLib;
-using System.Linq;
 using System.Collections.Generic;
 
-namespace VH_Ship_Marker_Mod
+namespace Vehicle_Map_Marker
 {
   class ZDOMan_Patch
   {
